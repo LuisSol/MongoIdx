@@ -12,6 +12,7 @@ const initializeMoongose = async () => {
   const mongooseOpts = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
   }
   mongoDbClient.connect(uri, mongooseOpts)
 
