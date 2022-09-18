@@ -1,3 +1,4 @@
+const { randNumber, randProductDescription, randAccessory, randAlphaNumeric } = require('@ngneat/falso')
 const { MongoMemoryServer } = require('mongodb-memory-server')
 const mongoDbClient = require('mongoose')
 const initializeSchema = require('../configurations/Schema')
@@ -24,6 +25,7 @@ const initializeMoongose = async () => {
 
   mongoDbClient.connection.on('open', async () => {
     const providers = ['Apple', 'Sony', 'Microsoft']
+    const providerId = []
     console.log(`MongoDB successfully connected to ${uri}`)
     console.log('Seeding database...')
     console.log('Seeding Providers...')
@@ -31,11 +33,30 @@ const initializeMoongose = async () => {
     await Promise.all(
       providers.map(providerName => {
         const provider = new models.Provider({ name: providerName })
+        providerId.push(provider.id)
         return provider.save()
       })
     )
 
     console.log('Finished seeding providers...')
+
+    console.log('Seeding products...')
+
+    await Promise.all(
+      [...Array(15000).keys()].map((_, i) => {
+        const product = new models.Product({
+          stockId: randAlphaNumeric(),
+          title: randAccessory(),
+          description: randProductDescription(),
+          price: randNumber({ min: 1, max: 2000, fraction: 2 }),
+          provider: providerId[randNumber({ min: 0, max: 2 })],
+        })
+        console.log(`Adding product ${i}`)
+        return product.save()
+      })
+    )
+
+    console.log('Finished seeding products...')
   })
 }
 
