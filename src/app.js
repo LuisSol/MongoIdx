@@ -3,8 +3,7 @@ const cors = require('cors')
 
 const app = express()
 
-// TODO CONTROLLERS
-// const { getProvidersCtrl, getProviderProductsCtrl } = require('./controllers')
+const { getProvidersCtrl, getProductsCtrl } = require('./controllers')
 
 app.use(cors())
 app.use(express.json())
@@ -15,6 +14,6 @@ app.get('/healt', (_, res) => {
 })
 
 app.get('/providers', getProvidersCtrl)
-app.get('/provider/:id', getProviderProductsCtrl)
+app.get('/provider/:id', getProductsCtrl)
 
 module.exports = app
