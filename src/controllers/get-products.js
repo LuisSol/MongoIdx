@@ -1,8 +1,8 @@
-module.exports = ({ useCases: { getProviderVehiclesUC } }) =>
-  async function getProviderVehicles({ params }, res) {
+module.exports = ({ useCases: { getProductsUC } }) =>
+  async function getProducts({ params }, res) {
     try {
       const { id } = params
-      const products = await getProviderVehiclesUC(id)
+      const products = await getProductsUC(id)
       return res.status(200).send(products)
     } catch (error) {
       console.log(error)
