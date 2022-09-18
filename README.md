@@ -1,0 +1,3 @@
+# MONGO INDEX TEST
+
+The purpose is to gater knowledge about how querying can be optimized in mongo...
