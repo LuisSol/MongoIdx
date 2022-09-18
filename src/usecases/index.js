@@ -1,5 +1,4 @@
-// TODO make data access
-// const { mongoDb } = require('../data-access')
+const { mongoDb } = require('../data-access')
 
 const makeGetProvidersUC = require('./get-providers')
 const makeGetProductsUC = require('./get-products')

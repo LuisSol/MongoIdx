@@ -12,7 +12,7 @@ module.exports = mongoose => {
   })
 
   const Provider = mongoose.model('Provider', providerSchema)
-  const Product = mongoose.model('Product', vehicleSchema)
+  const Product = mongoose.model('Product', productSchema)
 
   return Object.freeze({ Provider, Product })
 }
