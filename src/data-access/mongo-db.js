@@ -11,8 +11,19 @@ module.exports = ({ databases: { models } }) => {
 
   async function getProducts(id) {
     try {
-      const vehicles = await models.Product.find({ provider: id })
-      return vehicles
+      const products = await models.Product.find({ provider: id })
+      return products
+    } catch (error) {
+      console.log(error)
+      throw new Error(error)
+    }
+  }
+
+  async function getProductsBenchMark() {
+    try {
+      const [benchmark] = await models.Product.find({ price: { $gte: 100, $lte: 300 } }).explain()
+
+      return benchmark.executionStats
     } catch (error) {
       console.log(error)
       throw new Error(error)
@@ -22,5 +33,6 @@ module.exports = ({ databases: { models } }) => {
   return Object.freeze({
     getProviders,
     getProducts,
+    getProductsBenchMark,
   })
 }
